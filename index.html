@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6 Meses Amándote 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Satisfy&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #2F0506, #590807, #920F14);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding-top: 100px;
+            position: relative;
+        }
+
+        /* ✨ Estrellas y destellos */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* 🌠 Estrellas fugaces */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            animation: shoot 3s linear infinite;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-300px) translateY(300px);
+                opacity: 0;
+            }
+        }
+
+        /* ✨ Destellos */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #C31A1F;
+            border-radius: 50%;
+            animation: sparkleAnim 2s ease-in-out infinite;
+            box-shadow: 0 0 10px #C31A1F;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* 💕 Corazones colgantes */
+        .hanging-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .heart-string {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(195, 26, 31, 0.4), transparent);
+            top: 0;
+            animation: swing 4s ease-in-out infinite;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+        }
+
+        .hanging-heart {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: heartSwing 4s ease-in-out infinite;
+        }
+
+        @keyframes heartSwing {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            25% { transform: translateX(-50%) rotate(5deg); }
+            75% { transform: translateX(-50%) rotate(-5deg); }
+        }
+
+        .hanging-heart::before,
+        .hanging-heart::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 80%;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .hanging-heart::before {
+            left: 50%;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .hanging-heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .heart-color-1::before,
+        .heart-color-1::after {
+            background: #920F14;
+        }
+
+        .heart-color-2::before,
+        .heart-color-2::after {
+            background: #C31A1F;
+        }
+
+        .heart-color-3::before,
+        .heart-color-3::after {
+            background: #590807;
+        }
+
+        /* 🎵 Botón de música */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(195, 26, 31, 0.4);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(195, 26, 31, 0.6);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 100;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .music-control:hover {
+            background: rgba(195, 26, 31, 0.7);
+            transform: scale(1.1);
+        }
+
+        .music-control.playing {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(195, 26, 31, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(195, 26, 31, 0); }
+        }
+
+        /* ✨ Título */
+        .main-title {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Satisfy', cursive;
+            font-size: 50px;
+            background: linear-gradient(90deg, #C31A1F, #ff4d4d, #ffb3b3);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: shine 4s infinite linear;
+            text-align: center;
+            z-index: 20;
+            text-shadow: 0 0 20px rgba(195, 26, 31, 0.5);
+        }
+
+        @keyframes shine {
+            from { background-position: 0% 50%; }
+            to { background-position: 200% 50%; }
+        }
+
+        /* ✨ Calendario */
+        .days-counter {
+            position: fixed;
+            top: 100px;
+            left: 40px;
+            background: rgba(47, 5, 6, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 20px 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(195, 26, 31, 0.5);
+            z-index: 15;
+            text-align: center;
+            color: #fff;
+            font-family: 'Satisfy', cursive;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .days-counter-date {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffb3b3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .calendar-icon {
+            width: 30px;
+            height: 30px;
+            background: #C31A1F;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .calendar-icon-header {
+            width: 100%;
+            height: 8px;
+            background: #920F14;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .calendar-icon-day {
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        .days-counter-number {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .days-counter-label {
+            font-size: 18px;
+            color: #ffb3b3;
+            margin-bottom: 10px;
+        }
+
+        .days-counter-clock {
+            font-size: 15px;
+            margin-top: 5px;
+            color: #ff9999;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .time-unit {
+            font-size: 14px;
+        }
+
+        /* 🐮 Vaquita */
+        .cow-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            text-align: center;
+            z-index: 30;
+        }
+
+        .cow-message img {
+            width: 150px;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 5px 15px rgba(195, 26, 31, 0.5));
+        }
+
+        .cow-text {
+            font-family: 'Satisfy', cursive;
+            font-size: 20px;
+            color: #ffb3b3;
+            margin-top: 5px;
+            text-shadow: 0 0 10px rgba(195, 26, 31, 0.8);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 📸 Foto */
+        .main-container {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .photo-container {
+            width: 280px; 
+            height: 350px;
+            background: rgba(47, 5, 6, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid rgba(195, 26, 31, 0.5);
+            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .photo-container:hover { transform: scale(1.05); }
+
+        .photo-inner { 
+            width: 100%; 
+            height: 100%; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            background: #2F0506; 
+            position: relative; 
+        }
+        
+        .photo-slide { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            top: 0; 
+            left: 0; 
+            opacity: 0; 
+            transition: opacity 1s; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        
+        .photo-slide.active { opacity: 1; }
+        .photo-slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        .photo-indicators { 
+            position: absolute; 
+            bottom: 10px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            display: flex; 
+            gap: 6px; 
+            z-index: 5;
+        }
+        
+        .indicator { 
+            width: 10px; 
+            height: 10px; 
+            border-radius: 50%; 
+            background: rgba(255,255,255,0.5); 
+            cursor: pointer; 
+        }
+        
+        .indicator.active { background: #C31A1F; }
+
+        .photo-nav { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: rgba(47, 5, 6, 0.8); 
+            color: white; 
+            border: none; 
+            width: 35px; 
+            height: 35px; 
+            border-radius: 50%; 
+            cursor: pointer;
+            z-index: 5;
+        }
+        
+        .photo-nav.prev { left: 10px; } 
+        .photo-nav.next { right: 10px; }
+        
+        .photo-caption { 
+            text-align: center; 
+            color: #ffb3b3; 
+            margin-top: 10px; 
+            font-family: 'Satisfy', cursive; 
+            font-size: 20px; 
+            text-shadow: 0 2px 10px rgba(195, 26, 31, 0.5);
+        }
+
+        /* 💌 Sobre de carta estilo realista */
+        .letter-envelope {
+            position: relative;
+            width: 260px;
+            height: 180px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .letter-envelope:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Cuerpo principal del sobre */
+        .envelope-body {
+            position: relative;
+            width: 260px;
+            height: 180px;
+            background: linear-gradient(to bottom, #920F14, #C31A1F);
+            border-radius: 3px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        /* Triángulo superior izquierdo */
+        .envelope-flap-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-top: 90px solid #590807;
+            border-right: 130px solid transparent;
+            z-index: 2;
+        }
+
+        /* Triángulo superior derecho */
+        .envelope-flap-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 90px solid #590807;
+            border-left: 130px solid transparent;
+            z-index: 2;
+        }
+
+        /* Solapa principal que se abre */
+        .envelope-flap-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 130px solid transparent;
+            border-right: 130px solid transparent;
+            border-top: 100px solid #C31A1F;
+            transform-origin: top center;
+            transition: transform 0.7s ease;
+            z-index: 3;
+            filter: brightness(1.15);
+        }
+
+        .letter-envelope.opening .envelope-flap-top {
+            transform: rotateX(-180deg);
+        }
+
+        /* Sello/corazón */
+        .envelope-stamp {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55px;
+            height: 55px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            z-index: 4;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+            transition: all 0.5s ease;
+        }
+
+        .letter-envelope.opening .envelope-stamp {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.5);
+        }
+
+        .envelope-label {
+            text-align: center;
+            color: #ffb3b3;
+            margin-top: 10px;
+            font-family: 'Satisfy', cursive;
+            font-size: 20px;
+            text-shadow: 0 2px 10px rgba(195, 26, 31, 0.5);
+        }
+
+        /* 📩 Mensaje */
+        .message-container {
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%) scale(0);
+            width: 600px; 
+            max-width: 90vw; 
+            max-height: 80vh;
+            background: rgba(255,255,255,0.95);
+            padding: 40px; 
+            border-radius: 20px;
+            border: 3px solid #C31A1F;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+            z-index: 50; 
+            opacity: 0; 
+            transition: all 0.5s;
+            overflow-y: auto;
+        }
+        
+        .message-container.show { 
+            transform: translate(-50%, -50%) scale(1); 
+            opacity: 1; 
+        }
+        
+        .close-button { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            background: #C31A1F; 
+            color: white; 
+            border: none; 
+            width: 35px; 
+            height: 35px; 
+            border-radius: 50%; 
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .close-button:hover { background: #920F14; }
+
+        .message-header { 
+            text-align: center; 
+            font-family: 'Satisfy', cursive; 
+            font-size: 36px; 
+            color: #920F14; 
+            margin-bottom: 10px; 
+        }
+        
+        .message-subheader { 
+            text-align: center; 
+            font-size: 18px; 
+            color: #C31A1F; 
+            margin-bottom: 20px; 
+        }
+        
+        .message-content { 
+            text-align: justify; 
+            font-size: 16px; 
+            color: #333; 
+            line-height: 1.6; 
+        }
+
+        .message-content p {
+            margin-bottom: 15px;
+        }
+        
+        .message-signature { 
+            text-align: right; 
+            margin-top: 20px; 
+            font-family: 'Satisfy', cursive; 
+            font-size: 20px; 
+            color: #C31A1F; 
+        }
+    </style>
+</head>
+<body>
+    <h1 class="main-title">❤️ 6 Meses Amándote ❤️</h1>
+
+    <!-- Estrellas, destellos y estrellas fugaces -->
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- Corazones colgantes -->
+    <div class="hanging-hearts" id="hangingHeartsContainer"></div>
+
+    <!-- Control de música -->
+    <div class="music-control" id="musicControl" title="Pausar/Reproducir música">
+        <span id="musicIcon">🎵</span>
+    </div>
+
+    <!-- Calendario/reloj -->
+    <div class="days-counter">
+        <div class="days-counter-date">
+            <div class="calendar-icon">
+                <div class="calendar-icon-header"></div>
+                <div class="calendar-icon-day">30</div>
+            </div>
+            <span>30 Marzo 2025</span>
+        </div>
+        <div class="days-counter-number" id="daysNumber">0</div>
+        <div class="days-counter-label">Días Juntos</div>
+        <div class="days-counter-clock">
+            <div class="time-unit" id="totalHours">0 horas</div>
+            <div class="time-unit" id="minutes">0 minutos</div>
+            <div class="time-unit" id="seconds">0 segundos</div>
+        </div>
+    </div>
+
+    <!-- Vaquita 🐮 -->
+    <div class="cow-message">
+        <img src="https://i.pinimg.com/originals/b2/23/6f/b2236fa0be95d4626b704282e138cfdb.gif" alt="Vaquita">
+        <div class="cow-text">Te quiero muuuuucho 🐮💕</div>
+    </div>
+
+    <!-- Contenedor fotos y carta -->
+    <div class="main-container">
+        <div>
+            <div class="photo-container">
+                <div class="photo-inner">
+                    <div class="photo-slide active"><img src="foto1.jpg" alt="Nosotros 1"></div>
+                    <div class="photo-slide"><img src="foto2.jpg" alt="Nosotros 2"></div>
+                    <div class="photo-slide"><img src="foto3.jpg" alt="Nosotros 3"></div>
+                    <button class="photo-nav prev" onclick="changePhoto(-1)">❮</button>
+                    <button class="photo-nav next" onclick="changePhoto(1)">❯</button>
+                    <div class="photo-indicators" id="indicators"></div>
+                </div>
+            </div>
+            <div class="photo-caption">Nosotros ❤️</div>
+        </div>
+
+        <!-- Sobre de carta -->
+        <div>
+            <div class="letter-envelope" id="envelopeBtn">
+                <div class="envelope-body">
+                    <!-- Solapas del sobre -->
+                    <div class="envelope-flap-left"></div>
+                    <div class="envelope-flap-right"></div>
+                    <div class="envelope-flap-top"></div>
+                    
+                    <!-- Sello con corazón -->
+                    <div class="envelope-stamp">❤️</div>
+                </div>
+            </div>
+            <div class="envelope-label">Ábrela mi amor</div>
+        </div>
+    </div>
+
+    <!-- Mensaje -->
+    <div class="message-container" id="messageBox">
+        <button class="close-button" onclick="closeMessage()">×</button>
+        <div class="message-header">6 Meses Amándote</div>
+        <div class="message-subheader">A pesar de la distancia... 💕</div>
+        <div class="message-content">
+            <p>Mi querido lunares❤️,</p>
+            <p>Hoy quiero abrirte mi corazón y decirte lo mucho que significas para mí. A veces me cuesta encontrar las palabras exactas, pero lo que siento por ti es tan grande que necesito expresarlo.</p>
+            <p>Recuerdo con una sonrisa nuestra primera salida: yo, con mis preguntas interminables, y tú, intentando ponerte a la defensiva. Fue un momento raro, sí, pero también hermoso, porque ahí nació esa chispa que encendió todo lo que hoy somos. Y cómo olvidar nuestra primera pequeña “pelea”, aquella vez que te vi pasar con alguien frente a mi casa (sí, todavía me acuerdo 😅). Perdóname amor, pero hasta esos momentos nos enseñaron a comunicarnos y a entendernos mejor.</p>
+            <p>Cada salida contigo ha sido única, un pedacito de felicidad que guardo en mi corazón. Me hubiera encantado que el tiempo nos regalara más momentos juntos, pero incluso los más breves son recuerdos que atesoro con todo mi ser.</p>
+	    <p>Han pasado ya 6 meses desde aquel día en que decidimos iniciar este camino. Cómo olvidar nuestro primer beso, o aquellos pensamientos míos de que esta relación quizá no duraría… pero ahora lo veo de otra manera. Hoy entiendo que lo nuestro es especial, distinto, y me alegra tanto saber que tu familia sabe de mí. Aunque la distancia nos separe, siento el cariño que me transmiten, especialmente el de tu mamá. Sé que llegará el día en que compartamos momentos juntos con ellos, al igual que tú lo harás con mis padres.</p>
+	    <p>Sé que sobrellevar esta relación a la distancia es extraño y complicado. Ya ha pasado mucho tiempo sin vernos, hemos tenido algunas pequeñas discusiones sin sentido (si es que se pueden llamar peleas), pero aun así valoro cada instante. Aprecio todo lo que hemos vivido, ya sea en persona o en nuestras conversaciones virtuales.</p>
+	    <p>A veces, sin embargo, me siento triste… incluso me deprime tu forma de ser. Han pasado meses y he aprendido a convivir con tu manera tan particular de amar: sin detalles, sin cartas, sin sorpresas o citas. Sé que para ti son cosas “banales” o sin importancia, pero créeme amor, para mí esos pequeños gestos suman mucho en una relación. No me gusta sentir que tu orgullo puede ser más grande que el amor que dices tenerme. Y a veces me pregunto si realmente eres sincero al decirme “te amo” o al susurrarme todas esas palabras cursis. Yo elijo creer que sí lo eres, pero me encantaría que fueras más romántico conmigo.</p>
+            <p>Sé que tu respuesta sería: “yo no soy así”, pero por favor, créeme cuando te digo que cuando se ama de verdad, hasta el ser más duro cambia por la persona que ama. No seas la excepción, mi amor. Yo creo en ti, a pesar de todo lo que digan los demás, porque veo en ti a alguien con quien quiero seguir soñando.</p>
+	    <p>No sé cuál sea nuestro destino, no sé qué pueda pasar mañana, en un mes o en un año. Ni siquiera quiero imaginar cómo me sentiría si esto llegara a terminar. Pero si ese día llega, te prometo que nunca te olvidaré. Te recordaré con cariño y estaré feliz de lo que logres, ya sea conmigo o sin mí. No quiero ser egoísta y decirte que serás solo mío, porque el futuro es incierto. Pero si algún día tomamos caminos separados, solo deseo que me recuerdes con el mismo amor con que yo siempre te recordaré.</p>
+	    <p>Y si realmente nuestro destino es estar juntos, sé que el tiempo y la distancia nos volverán a unir. Mientras tanto, quiero que sepas que te quiero con todo mi corazón y que no importa lo que pase, siempre estaré agradecida por el amor que compartimos. En cada momento, en cada palabra, en cada recuerdo, te he querido de verdad.</p>
+            <p>Te amo hoy, te amo en la distancia y te amaré en cada paso del camino que nos espera. ❤️</p>
+        </div>
+        <div class="message-signature">Con todo mi corazón,<br>Dai...✨ </div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="music" loop>
+        <source src="pero-te-conoci.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        /* Crear estrellas, destellos y estrellas fugaces */
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            
+            // Estrellas fijas titilantes
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(star);
+            }
+            
+            // Estrellas fugaces
+            for (let i = 0; i < 5; i++) {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                shootingStar.style.left = Math.random() * 100 + '%';
+                shootingStar.style.top = Math.random() * 50 + '%';
+                shootingStar.style.animationDelay = Math.random() * 5 + 's';
+                shootingStar.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(shootingStar);
+            }
+            
+            // Destellos
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                sparkle.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                container.appendChild(sparkle);
+            }
+        }
+
+        /* Crear corazones colgantes */
+        function createHangingHearts() {
+            const container = document.getElementById('hangingHeartsContainer');
+            const positions = [8, 20, 35, 50, 65, 80, 92]; // Posiciones en porcentaje
+            const sizes = [30, 40, 50, 60, 45, 35, 55]; // Tamaños variados
+            const heights = [150, 200, 180, 220, 160, 190, 170]; // Alturas de los hilos
+            const colors = ['heart-color-1', 'heart-color-2', 'heart-color-3'];
+            
+            positions.forEach((pos, index) => {
+                // Crear el hilo
+                const string = document.createElement('div');
+                string.className = 'heart-string';
+                string.style.left = pos + '%';
+                string.style.height = heights[index] + 'px';
+                string.style.animationDelay = (index * 0.3) + 's';
+                
+                // Crear el corazón
+                const heart = document.createElement('div');
+                heart.className = 'hanging-heart ' + colors[index % 3];
+                heart.style.width = sizes[index] + 'px';
+                heart.style.height = sizes[index] + 'px';
+                heart.style.animationDelay = (index * 0.3) + 's';
+                
+                string.appendChild(heart);
+                container.appendChild(string);
+            });
+        }
+
+        /* Control de música */
+        const music = document.getElementById('music');
+        const musicControl = document.getElementById('musicControl');
+        const musicIcon = document.getElementById('musicIcon');
+        let isPlaying = false;
+
+        musicControl.onclick = () => {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.textContent = '🎵';
+                musicControl.classList.remove('playing');
+            } else {
+                music.play().catch(()=>{});
+                musicIcon.textContent = '⏸️';
+                musicControl.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        };
+
+        /* Galería */
+        let currentPhoto = 0;
+        const slides = document.querySelectorAll('.photo-slide');
+        const totalPhotos = slides.length;
+
+        function createIndicators() {
+            const ind = document.getElementById('indicators');
+            for (let i = 0; i < totalPhotos; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'indicator' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToPhoto(i);
+                ind.appendChild(dot);
+            }
+        }
+        
+        function changePhoto(dir) {
+            slides[currentPhoto].classList.remove('active');
+            document.querySelectorAll('.indicator')[currentPhoto].classList.remove('active');
+            currentPhoto = (currentPhoto + dir + totalPhotos) % totalPhotos;
+            slides[currentPhoto].classList.add('active');
+            document.querySelectorAll('.indicator')[currentPhoto].classList.add('active');
+        }
+        
+        function goToPhoto(i) {
+            slides[currentPhoto].classList.remove('active');
+            document.querySelectorAll('.indicator')[currentPhoto].classList.remove('active');
+            currentPhoto = i;
+            slides[currentPhoto].classList.add('active');
+            document.querySelectorAll('.indicator')[currentPhoto].classList.add('active');
+        }
+        
+        setInterval(() => changePhoto(1), 4000);
+
+        /* Contador TOTAL de tiempo */
+        function updateCounter() {
+            const startDate = new Date('2025-03-30T00:00:00');
+            const now = new Date();
+            
+            const diffMs = now - startDate;
+            
+            // Calcular TOTALES acumulados
+            const totalDays = Math.floor(diffMs / (1000*60*60*24));
+            const totalHours = Math.floor(diffMs / (1000*60*60));
+            const totalMinutes = Math.floor((diffMs % (1000*60*60)) / (1000*60));
+            const totalSeconds = Math.floor((diffMs % (1000*60)) / 1000);
+            
+            document.getElementById('daysNumber').textContent = totalDays;
+            document.getElementById('totalHours').textContent = totalHours + ' horas';
+            document.getElementById('minutes').textContent = totalMinutes + ' minutos';
+            document.getElementById('seconds').textContent = totalSeconds + ' segundos';
+        }
+        
+        setInterval(updateCounter, 1000);
+
+        /* Animación del corazón y mensaje */
+        const envelopeBtn = document.getElementById('envelopeBtn');
+        const messageBox = document.getElementById('messageBox');
+
+        envelopeBtn.onclick = () => {
+            envelopeBtn.classList.add('opening');
+            
+            setTimeout(() => {
+                messageBox.classList.add('show');
+                if (!isPlaying) {
+                    music.volume = 0.6;
+                    music.play().catch(()=>{});
+                    musicIcon.textContent = '⏸️';
+                    musicControl.classList.add('playing');
+                    isPlaying = true;
+                }
+            }, 1000);
+        };
+        
+        function closeMessage() {
+            messageBox.classList.remove('show');
+            setTimeout(() => {
+                envelopeBtn.classList.remove('opening');
+            }, 500);
+        }
+
+        /* Init */
+        createStars();
+        createHangingHearts();
+        createIndicators();
+        updateCounter();
+    </script>
+</body>
+</html>
